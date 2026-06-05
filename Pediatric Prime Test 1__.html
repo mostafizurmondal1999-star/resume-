@@ -1,0 +1,559 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pediatric Prime Test 1</title>
+    <style>
+        /* Modern & Attractive CSS using Pacific Ocean and Sage Sensation themes */
+        :root {
+            --pacific-ocean: #0077be;
+            --pacific-dark: #005b96;
+            --sage-sensation: #9DC183;
+            --sage-light: #e8f0e1;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --bg-color: #f4f7f6;
+            --danger: #e74c3c;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-dark);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--pacific-ocean), var(--pacific-dark));
+            color: var(--text-light);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* --- New Logo Text CSS --- */
+        .logo-text-container {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dotted var(--sage-sensation);
+        }
+        
+        .logo-title {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo-subtitle {
+            margin: 5px 0;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--sage-light);
+        }
+        
+        .logo-tagline {
+            margin: 8px 0 0 0;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: var(--sage-sensation);
+            text-transform: uppercase;
+        }
+        /* ------------------------- */
+
+        h1 { margin: 0; font-size: 24px; letter-spacing: 1px; color: var(--sage-light); }
+        
+        .timer-container {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: var(--text-light);
+            color: var(--danger);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            border: 2px solid var(--sage-sensation);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .question-card { 
+            background: var(--text-light); 
+            padding: 25px; 
+            margin-bottom: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            border-left: 6px solid var(--sage-sensation);
+            transition: transform 0.2s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .question-text { 
+            font-size: 18px; 
+            font-weight: 600; 
+            margin-bottom: 15px; 
+            color: var(--pacific-dark);
+        }
+
+        .option { 
+            margin-bottom: 12px; 
+            padding: 10px 15px;
+            border-radius: 8px;
+            background-color: #f9fbf9;
+            border: 1px solid #e1e8e1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            background-color: var(--sage-light);
+            border-color: var(--sage-sensation);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .option label {
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
+            width: 90%;
+        }
+
+        button { 
+            background: linear-gradient(135deg, var(--sage-sensation), #7da85d); 
+            color: white; 
+            border: none; 
+            padding: 15px 40px; 
+            font-size: 18px; 
+            font-weight: bold;
+            cursor: pointer; 
+            border-radius: 30px; 
+            display: block; 
+            margin: 40px auto; 
+            box-shadow: 0 4px 10px rgba(157, 193, 131, 0.4);
+            transition: all 0.3s;
+        }
+
+        button:hover { 
+            background: linear-gradient(135deg, #7da85d, #6a914e);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(157, 193, 131, 0.5);
+        }
+
+        #result { 
+            margin-top: 30px; 
+            font-size: 18px; 
+            padding: 30px; 
+            background: var(--text-light); 
+            border-top: 6px solid var(--pacific-ocean); 
+            text-align: center; 
+            display: none; 
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .score-highlight { 
+            color: var(--pacific-ocean); 
+            font-size: 32px; 
+            font-weight: bold;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .stat-box {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            background: var(--sage-light);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Added Logo Texts -->
+        <div class="logo-text-container">
+            <h2 class="logo-title">WB NURSING</h2>
+            <h3 class="logo-subtitle">JOB INFORMATION</h3>
+            <p class="logo-tagline">CARE &bull; OPPORTUNITY &bull; GROWTH</p>
+        </div>
+        
+        <h1>Pediatric Prime Test 1</h1>
+        <div class="timer-container" id="timer">Time Left: 45:00</div>
+    </header>
+
+    <div class="container">
+        <form id="quiz-form"></form>
+        <button type="button" id="submit-btn" onclick="submitTest()">Submit Test</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "A family has decided to withhold 'extraordinary care' for a newborn with severe abnormalities. How should the nurse interpret this decision?",
+                options: ["The newborn has no rights.", "It is the same as euthanasia.", "It is illegal professional practice.", "The newborn is being allowed to die."],
+                ans: 3
+            },
+            {
+                q: "A nurse is planning an initial home care visit to a mother who gave birth to a high-risk infant. For what time of day should the nurse schedule the visit for it to be most productive?",
+                options: ["When the husband is out of the home.", "At a time the mother is feeding the infant.", "At a time that is convenient for the family.", "When the nurse can spend time with the family."],
+                ans: 2
+            },
+            {
+                q: "What is the first action a nurse should take before administering a tube feeding to an infant?",
+                options: ["Irrigate the tube with water.", "Offer a pacifier to the infant.", "Slowly instill 10 mL of formula.", "Place the infant in the Trendelenburg position."],
+                ans: 1
+            },
+            {
+                q: "Which nursing intervention provides the most support to the parents of an infant with an obvious physical anomaly?",
+                options: ["Encourage them to express their concerns.", "Discourage them from talking about their baby.", "Assure them not to worry because the anomaly can be repaired.", "Show them postoperative photographs of infants who had similar anomaly."],
+                ans: 0
+            },
+            {
+                q: "When picked up by a parent or the nurse, an 8-month-old infant screams and seems to be in pain. After observing this behavior, what should the nurse discuss with the parent?",
+                options: ["Accidents and the importance of their prevention", "Limiting play time with other children in the family", "Any other behaviors that the parent may have noticed", "Food and specific vitamins that should be given to infants"],
+                ans: 2
+            },
+            {
+                q: "A 1-week-old infant has been in the pediatric unit for 18 hours following placement of a spica cast. The nurse observes a respiratory rate of fewer than 24 breaths/min. No other changes are noted. Because the infant is apparently well, the nurse does not report or documentation the slow respiratory rate. Several hours later, the infant experiences severe respiratory distress and emergency care is necessary. What should be considered if legal action is taken?",
+                options: ["Most infants respirations are slow when they are uncomfortable.", "The respirations of young infants are irregular, so a drop in rate is unimportant.", "Vital signs that are outside the expected parameters are significant and should be documented.", "The respiratory tract of young infants is underdeveloped, and their respiratory rate is not significant."],
+                ans: 2
+            },
+            {
+                q: "What nursing intervention best meets a major developmental need of a newborn in the immediate postoperative period?",
+                options: ["Giving a pacifier to the infant", "Putting a mobile over the infant's crib", "Providing the infant with a soft, cuddly toy", "Warming the infant's formula before feeding"],
+                ans: 0
+            },
+            {
+                q: "A parent and 3-month-old infant are visiting the well-baby clinic for a routine examination. What should the nurse include in the accident prevention teaching plan?",
+                options: ["Remove small objects from the floor.", "Cover electric outlets with safety plugs.", "Remove toxic substances from low areas.", "Test the temperature of water before bathing."],
+                ans: 3
+            },
+            {
+                q: "A nurse is teaching a parent how to prevent accidents while caring for a 6-month-old infant. What ability should be emphasized about the infant's motor development?",
+                options: ["Sits up", "Rolls over", "Crawls short distances", "Stands while holding on to furniture"],
+                ans: 1
+            },
+            {
+                q: "A 7-month-old girl is to be catheterized to obtain a sterile urine specimen. One of the infant's parents expresses fear that this procedure may traumatize the baby psychologically. How should the nurse provide reassurance?",
+                options: ["The fear is justified and the nurse should obtain a \"clean catch\" specimen.", "Parents have a right to refuse the catheterization and the concerns are realistic.", "Although the concern is appropriate, the need for a sterile specimen is the priority.", "The procedure is uncomfortable, but there should not be a damaging long-term effect."],
+                ans: 3
+            },
+            {
+                q: "A nurse is assessing the oral cavity of a 6-month-old infant. The parent asks which teeth will erupt first. How should the nurse respond?",
+                options: ["Incisors", "Canines", "Upper molars", "Lower molars"],
+                ans: 0
+            },
+            {
+                q: "A nurse is teaching a class of new parents about how to position their infants during the first few weeks of life. Which position is safest?",
+                options: ["On the back, lying flat", "On either side, lying flat", "Head slightly elevated on the left side", "Head slightly elevated on the right side"],
+                ans: 0
+            },
+            {
+                q: "A parent arrives in the emergency clinic with a 3-month-old baby who says, \"My baby stopped breathing for a while.\" The infant continues to have difficulty breathing, with prolonged periods of apnea. Which assessment data should alert the nurse to suspect shaken baby syndrome (SBS)?",
+                options: ["Birth occurred before 32 weeks' gestation", "Lack of stridor and adventitious breath sounds", "Previous episodes of apnea lasting 10 to 15 seconds", "Retractions and use of accessory respiratory muscles"],
+                ans: 1
+            },
+            {
+                q: "Parents of a sick infant talk with a nurse about their baby. One parent says, \"I am so upset; I didn't realize our baby was ill.\" What major indication of illness in an infant should the nurse explain to the parent?",
+                options: ["Grunting respirations", "Excessive perspiration", "Longer periods of sleep", "Crying immediately after feedings"],
+                ans: 0
+            },
+            {
+                q: "A newborn is admitted to the neonatal intensive care unit (NICU) with choanal atresia. Which part of the infant's body should the nurse assess?",
+                options: ["Rectum", "Nasopharynx", "Intestinal tract", "Laryngopharynx"],
+                ans: 1
+            },
+            {
+                q: "What behavior does the nurse anticipate while feeding a newborn with choanal atresia?",
+                options: ["Chokes on the feeding", "Has difficulty swallowing", "Does not appear to be hungry", "Takes about half of the feeding"],
+                ans: 0
+            },
+            {
+                q: "What is the nurse's priority intervention when preparing for admission of a child with acute laryngotracheobronchitis?",
+                options: ["Pad the side rails of the crib.", "Arrange for a quiet, cool room.", "Place a tracheotomy set at the bedside.", "Obtain a recliner so that a parent can stay."],
+                ans: 2
+            },
+            {
+                q: "What should be the nurse's priority action when caring for a child with acute laryngotracheobronchitis?",
+                options: ["Initiate measures to reduce fever.", "Ensure delivery of humidified oxygen.", "Provide support to reduce apprehension.", "Continually assess the respiratory status."],
+                ans: 3
+            },
+            {
+                q: "A 3-month-old infant has been hospitalized with respiratory syncytial virus (RSV). What is the priority intervention?",
+                options: ["Administering an antiviral agent", "Clustering care to conserve energy", "Offering oral fluids to promote hydration", "Providing an antitussive agent whenever necessary"],
+                ans: 1
+            },
+            {
+                q: "A child is admitted to the hospital with pneumonia. What is the priority need that must be included in the nursing plan of care for this child?",
+                options: ["Rest", "Exercise", "Nutrition", "Elimination"],
+                ans: 0
+            },
+            {
+                q: "A 6-month-old infant is brought to the emergency department in severe respiratory distress. A diagnosis of respiratory syncytial virus (RSV) is made and the infant is admitted to the pediatric unit. What should be included in the nursing plan of care?",
+                options: ["Place in a warm, dry environment.", "Allow parents and siblings to visit.", "Maintain standard and contact precautions.", "Administer prescribed antibiotic immediately."],
+                ans: 2
+            },
+            {
+                q: "An infant is admitted to the neonatal intensive care unit (NICU) with exstrophy of the bladder. What covering should the nurse use to protect the exposed area?",
+                options: ["Loose diaper", "Dry gauze dressing", "Moist sterile dressing", "Petroleum jelly gauze pad"],
+                ans: 2
+            },
+            {
+                q: "An additional defect is associated with exstrophy of the bladder. For what anomaly should the nurse assess the infant?",
+                options: ["Imperforate anus", "Absence of one kidney", "Congenital heart disease", "Pubic bone malformation"],
+                ans: 3
+            },
+            {
+                q: "A nurse is caring for an infant born with exstrophy of the bladder. What does the nurse determine is the greatest risk for this infant?",
+                options: ["Infection", "Dehydration", "Urinary retention", "Intestinal obstruction"],
+                ans: 0
+            },
+            {
+                q: "A home care nurse is visiting a family for the first time. The 4-week-old infant had surgery for exstrophy of the bladder and creation of an ileal conduit soon after birth. When the nurse arrives, the mother appears tired and the baby is crying. After an introduction, which is the most appropriate statement by the nurse?",
+                options: ["Tell me about your daily routine.", "You look tired. Is everything all right?", "When was the last time the baby had a bottle?", "Oh, it looks like you two are having a bad day."],
+                ans: 0
+            },
+            {
+                q: "The nurse is teaching a parent group about the reason for adhering to the immunization schedule. What complication of mumps is important for adolescents to avoid?",
+                options: ["Sterility", "Hypopituitarism", "Decrease in libido", "Decrease in androgens"],
+                ans: 0
+            },
+            {
+                q: "A nurse is performing a physical examination on an infant with Down syndrome. For what anomaly should the nurse assess the child?",
+                options: ["Bulging fontanels", "Stiff lower extremities", "Abnormal heart sounds", "Unusual pupillary reactions"],
+                ans: 2
+            },
+            {
+                q: "A parent tells the nurse, \"My 9-month-old baby no longer has the same strong grasp that was present at birth and no longer acts startled by loud noises.\" How should the nurse explain these changes in behavior?",
+                options: ["\"I will check these responses before deciding how to proceed.\"", "\"Failure of these responses may be related to a developmental delay.\"", "\"Additional sensory stimulation is needed to aid in the return of these responses.\"", "\"These responses are replaced by voluntary activity at about five months of age.\""],
+                ans: 3
+            },
+            {
+                q: "The nurse is teaching a group of parents about the side effects of the immunization vaccines. Which sign should the nurse include when talking about an infant receiving the Haemophilus influenzae (Hib) vaccine?",
+                options: ["Lethargy", "Urticaria", "Generalized rash", "Low-grade fever"],
+                ans: 3
+            },
+            {
+                q: "An infant who has had diarrhea for 3 days is admitted in a lethargic state and is breathing rapidly. The parent states that the baby has been ingesting formula, although not as much as usual, and cannot understand the sudden change. What explanation should the nurse give the parent?",
+                options: ["Cellular metabolism is unstable in young children.", "The proportion of water in the body is less than in adults.", "Renal function is immature in children until they reach school age.", "The extracellular fluid requirement per unit of body weight is greater than in adults."],
+                ans: 3
+            },
+            {
+                q: "When explaining the occurrence of febrile seizures to a parents' class, what information should the nurse include?",
+                options: ["They may occur in minor illnesses.", "The cause is usually readily identified.", "They usually do not occur during the toddler years.", "The frequency of occurrence is greater in females than males."],
+                ans: 0
+            },
+            {
+                q: "A parent tells the nurse in the emergency department, \"My 3-year-old has had a fever for several days and has been vomiting.\" After instituting ordered measures to reduce the fever, what nursing action is most important?",
+                options: ["Preventing shivering", "Restricting oral fluids", "Measuring output hourly", "Taking vital signs hourly"],
+                ans: 0
+            },
+            {
+                q: "The nurse observes that a 3-year-old child in a crib has a clamped jaw and is having a tonic-clonic seizure. What is the priority nursing responsibility at this time?",
+                options: ["Apply restraints.", "Administer oxygen.", "Protect the child from self-injury.", "Insert a plastic airway in the child's mouth."],
+                ans: 2
+            },
+            {
+                q: "A child sitting on a chair in a playroom starts to have a tonic-clonic seizure with a clenched jaw. What is the nurse's best initial action?",
+                options: ["Attempt to open the jaw.", "Place the child on the floor.", "Call out for assistance from staff.", "Place a pillow under the child's head."],
+                ans: 1
+            },
+            {
+                q: "An infant is diagnosed with communicating hydrocephalus. The parents ask for clarification of the health care provider's explanation of their baby's problem. How should the nurse respond?",
+                options: ["\"Too much spinal fluid is produced within the spaces (ventricles) of the brain.\"", "\"The flow of spinal fluid through the brain cells does not empty effectively into the spinal cord.\"", "\"The spinal fluid is prevented from adequate absorption by a blockage in the spaces (ventricles) of the brain.\"", "\"There is a part of the brain surface that usually absorbs spinal fluid after its production that is not functioning adequately.\""],
+                ans: 3
+            },
+            {
+                q: "A 6-week-old infant and the mother arrive in the emergency department via ambulance. The father arrives several minutes later with two children, 7 and 9 years old. The infant is not breathing, and the eventual diagnosis is sudden infant death syndrome (SIDS). The parents take turns holding the infant in another room. The nurse remains present and provides emotional support to the parents. What is an important short-term goal for this family?",
+                options: ["Identify the problems that they will be facing related to the loss of the infant.", "Include the infant's siblings in the events and grieving following the infant's death.", "Seek out other families who have lost infants to SIDS and receive support from them.", "Accept that there was nothing that they should have done to prevent the infant's death."],
+                ans: 1
+            },
+            {
+                q: "What should be included in the nursing care of an infant with increased intracranial pressure?",
+                options: ["Weigh daily before feeding.", "Elevate the head higher than the hips.", "Check the reflexes at regular intervals.", "Monitor alertness with frequent stimulation."],
+                ans: 1
+            },
+            {
+                q: "The parents of an infant who just had a ventriculoperitoneal shunt inserted for hydrocephalus are concerned about the prognosis. What information should the nurse give the parents?",
+                options: ["The prognosis is excellent and the valve is permanent.", "The shunt may need to be revised as the child grows older.", "If any brain damage has occurred, it is irreversible even after the first year of life.", "Hydrocephalus usually is self-limiting by 2 years of age, and then the shunt is removed."],
+                ans: 1
+            },
+            {
+                q: "An infant who was born with a meningomyelocele develops hydrocephalus. A ventriculoperitoneal shunt is inserted. What nursing intervention is essential in this infant's care during the first 24 hours after surgery?",
+                options: ["Placing in high-Fowler position", "Administering the prescribed sedative", "Positioning on the same side as the shunt", "Monitoring for increasing intracranial pressure"],
+                ans: 3
+            },
+            {
+                q: "The discharge of a newborn with a surgically repaired myelomeningocele is anticipated at about 2 weeks of age. What teaching should the nurse include when preparing the parents for the discharge?",
+                options: ["Demonstration of restrictive positions to prevent the infant from turning", "Discussion about the need to limit the infant's fluid intake to formula only", "Instructions on how to do passive range-of-motion exercises to the infant's lower extremities", "Explanation of the need to provide the infant with a quiet environment to reduce external stimuli"],
+                ans: 2
+            },
+            {
+                q: "A nurse in the pediatric clinic is assessing an infant who had a revision of a ventriculoperitoneal shunt. What clinical finding alerts the nurse that intracranial pressure has increased?",
+                options: ["Increased pulse rate", "Hypoactive reflexes", "Decreased blood pressure", "Tension of the anterior fontanel"],
+                ans: 3
+            },
+            {
+                q: "The parents of an infant who has had a surgical repair of a myelomeningocele express concern about skin care and ask what they can do to avoid problems. The nurse should teach the parents that their infant:",
+                options: ["will require long-term multidisciplinary follow-up care.", "should take prophylactic antibiotic therapy indefinitely.", "must be kept dry by applying powder after each diaper change.", "does not need anything more than routine cleansing and diaper changes."],
+                ans: 0
+            },
+            {
+                q: "What is the primary nursing intervention for an infant with a myelomeningocele before surgical correction?",
+                options: ["Minimize infection.", "Prevent trauma to the sac.", "Observe for increasing paralysis.", "Assess the degree of bowel and bladder control."],
+                ans: 1
+            },
+            {
+                q: "An infant with a myelomeningocele is admitted to the pediatric intensive care unit (PICU). While the infant is awaiting surgical correction of the defect, what is the most appropriate nursing intervention?",
+                options: ["Using disposable diapers", "Placing the infant in the prone position", "Performing neurologic checks above the site of the lesion", "Washing the area below the defect with a nontoxic antiseptic"],
+                ans: 1
+            },
+            {
+                q: "After closure of a newborn's myelomeningocele, what essential nursing intervention must be included in the plan of care?",
+                options: ["Limiting leg movement", "Decreasing environmental stimuli", "Measuring head circumference daily", "Observing for serous drainage from the nares"],
+                ans: 2
+            },
+            {
+                q: "A nurse is caring for an infant with bacterial meningitis. The parents ask how their baby could have contracted the illness. What does the nurse consider as the most likely route of transmission to the central nervous system (CNS)?",
+                options: ["Genitourinary tract", "Gastrointestinal tract", "Skin or mucous membranes", "Cranial apertures or sinuses"],
+                ans: 3
+            },
+            {
+                q: "For how long should a nurse maintain isolation of a child with bacterial meningitis?",
+                options: ["For 12 hours after admission", "Until the cultures are negative", "Until antibiotic therapy is completed", "For 48 hours after antibiotic therapy begins"],
+                ans: 3
+            },
+            {
+                q: "A 1-year-old infant has been admitted with a tentative diagnosis of bacterial meningitis. A lumbar puncture is performed to confirm the diagnosis. What laboratory report of the spinal fluid supports this diagnosis?",
+                options: ["Decreased cell count", "Elevated protein level", "Increased glucose level", "Low spinal fluid pressure"],
+                ans: 1
+            },
+            {
+                q: "A nurse is caring for a child with meningococcal meningitis. What clinical finding does the nurse expect when performing a physical assessment?",
+                options: ["Severe glossitis", "Low-grade fever", "Purpuric skin rash", "Tremors of the extremities"],
+                ans: 2
+            },
+            {
+                q: "What does a nurse determine is the most serious complication of meningitis in young children?",
+                options: ["Epilepsy", "Blindness", "Peripheral circulatory collapse", "Communicating hydrocephalus"],
+                ans: 2
+            }
+        ];
+
+        const form = document.getElementById("quiz-form");
+        
+        // Render Questions dynamically
+        questions.forEach((q, index) => {
+            let qHTML = `<div class="question-card">
+                            <div class="question-text">${index + 1}. ${q.q}</div>`;
+            q.options.forEach((opt, optIndex) => {
+                qHTML += `<div class="option" onclick="document.getElementById('q${index}_${optIndex}').click();">
+                            <input type="radio" name="q${index}" value="${optIndex}" id="q${index}_${optIndex}">
+                            <label for="q${index}_${optIndex}">${opt}</label>
+                          </div>`;
+            });
+            qHTML += `</div>`;
+            form.innerHTML += qHTML;
+        });
+
+        // Timer Logic (45 Minutes)
+        let totalSeconds = 45 * 60;
+        const timerElement = document.getElementById("timer");
+
+        const interval = setInterval(() => {
+            if (totalSeconds <= 0) {
+                clearInterval(interval);
+                timerElement.innerText = "Time's Up!";
+                alert("Time is up! Submitting your test automatically.");
+                submitTest();
+            } else {
+                let minutes = Math.floor(totalSeconds / 60);
+                let seconds = totalSeconds % 60;
+                timerElement.innerText = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                
+                // Change color to red when less than 5 minutes remain
+                if(totalSeconds < 300) {
+                    timerElement.style.color = "#e74c3c";
+                    timerElement.style.borderColor = "#e74c3c";
+                }
+                totalSeconds--;
+            }
+        }, 1000);
+
+        // Submit & Evaluation Logic
+        function submitTest() {
+            clearInterval(interval);
+            let score = 0;
+            let correctCount = 0;
+            let wrongCount = 0;
+            let skippedCount = 0;
+
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected) {
+                    if (parseInt(selected.value) === q.ans) {
+                        score += 1;
+                        correctCount++;
+                    } else {
+                        score -= 0.25;
+                        wrongCount++;
+                    }
+                } else {
+                    skippedCount++;
+                }
+            });
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = `
+                <h2>Test Completed!</h2>
+                <div>
+                    <span class="stat-box" style="color: #27ae60;">Correct: ${correctCount}</span>
+                    <span class="stat-box" style="color: #e74c3c;">Wrong: ${wrongCount}</span>
+                    <span class="stat-box" style="color: #7f8c8d;">Skipped: ${skippedCount}</span>
+                </div>
+                <div class="score-highlight">Total Score: ${score.toFixed(2)} / ${questions.length}</div>
+            `;
+            
+            // Disable all inputs and hide the submit button after submission
+            const allInputs = document.querySelectorAll("input[type='radio']");
+            allInputs.forEach(input => input.disabled = true);
+            const allOptions = document.querySelectorAll(".option");
+            allOptions.forEach(opt => opt.style.pointerEvents = "none");
+            
+            document.getElementById("submit-btn").style.display = "none";
+            document.getElementById("timer").style.display = "none";
+            
+            // Scroll to the top to see the result
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
